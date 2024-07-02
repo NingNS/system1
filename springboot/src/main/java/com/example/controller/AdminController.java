@@ -67,7 +67,7 @@ public class AdminController {
      * 查询所有
      */
     @GetMapping("/selectAll")
-    public Result selectAll(Admin admin ) {
+    public Result selectAll(Admin admin) {
         List<Admin> list = adminService.selectAll(admin);
         return Result.success(list);
     }
