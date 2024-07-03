@@ -19,8 +19,8 @@ public class HotelController {
     private HotelService hotelService;
 
     @GetMapping("/selectAll")
-    public Result selectAll(Hotel hotel) {
-        List<Hotel> list = hotelService.selectAll(hotel);
+    public Result selectAll() {
+        List<Hotel> list = hotelService.selectAll();
         return Result.success(list);
     }
 

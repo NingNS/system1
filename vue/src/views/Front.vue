@@ -4,8 +4,8 @@
     <!--头部-->
     <div class="front-header">
       <div class="front-header-left">
-        <img src="@/assets/imgs/logo.png" alt="">
-        <div class="title">项目前台</div>
+        <img src="@/assets/imgs/VCG211247829880.jpg" alt="">
+        <div class="title">酒店预订网</div>
       </div>
       <div class="front-header-center">
         <div class="front-header-nav">

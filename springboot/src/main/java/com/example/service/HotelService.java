@@ -47,8 +47,8 @@ public class HotelService {
         hotelMapper.insert(hotel);
     }
 
-    public List<Hotel> selectAll(Hotel hotel) {
-        return hotelMapper.selectAll(hotel);
+    public List<Hotel> selectAll() {
+        return hotelMapper.selectAll(new Hotel());
     }
 
     public PageInfo<Hotel> selectPage(Hotel hotel, Integer pageNum, Integer pageSize) {
