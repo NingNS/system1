@@ -33,7 +33,10 @@
 
     <delete id="deleteById">
         delete from admin
-        where  id = #{id}
+        where  id = #{id};
+        ALTER TABLE `admin` DROP `id`;
+        ALTER TABLE `admin` ADD `id` int NOT NULL FIRST;
+        ALTER TABLE `admin` MODIFY COLUMN `id` int NOT NULL AUTO_INCREMENT,ADD PRIMARY KEY(id);
     </delete>
 
     <insert id="insert" parameterType="com.example.entity.Admin" useGeneratedKeys="true">

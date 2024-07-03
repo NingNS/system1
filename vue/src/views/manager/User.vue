@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="search">
-      <el-input placeholder="查询酒店名称" style="width: 200px" v-model="name"></el-input>
+      <el-input placeholder="查询" style="width: 200px" v-model="username"></el-input>
       <el-button type="info" plain style="margin-left: 10px" @click="load(1)">查询</el-button>
       <el-button type="warning" plain style="margin-left: 10px" @click="reset">重置</el-button>
     </div>
-<!--    设计多级查询-->
+    <!--    设计多级查询-->
 
     <div class="operation">
       <el-button type="primary" plain @click="handleAdd">新增</el-button>
@@ -17,7 +17,7 @@
         <el-table-column type="selection" width="55" align="center"></el-table-column>
         <el-table-column prop="id" label="序号" width="70" align="center" sortable></el-table-column>
 
-        <el-table-column label="图片">
+        <el-table-column label="头像">
           <template v-slot="scope">
             <div style="display: flex; align-items: center">
               <el-image style="width: 40px; height: 40px; border-radius: 50%" v-if="scope.row.avatar"
@@ -25,18 +25,12 @@
             </div>
           </template>
         </el-table-column>
-
-        <el-table-column prop="username" label="酒店账号"></el-table-column>
-        <el-table-column prop="name" label="酒店名称"></el-table-column>
-        <el-table-column prop="price" label="价格"></el-table-column>
+        <el-table-column prop="username" label="UID"></el-table-column>
+        <el-table-column prop="name" label="用户名"></el-table-column>
         <el-table-column prop="phone" label="电话"></el-table-column>
         <el-table-column prop="email" label="邮箱"></el-table-column>
 
-        <el-table-column prop="url" label="官网"></el-table-column>
-        <el-table-column prop="description" label="介绍"></el-table-column>
-        <el-table-column prop="status" label="营业状态"></el-table-column>
-
-<!--        <el-table-column prop="role" label="角色"></el-table-column>-->
+        <!--        <el-table-column prop="role" label="角色"></el-table-column>-->
         <el-table-column label="操作" align="center" width="180">
           <template v-slot="scope">
             <el-button size="mini" type="primary" plain @click="handleEdit(scope.row)">编辑</el-button>
@@ -59,19 +53,14 @@
     </div>
 
 
-    <el-dialog title="酒店" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
+    <el-dialog title="用户" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
       <el-form :model="form" label-width="100px" style="padding-right: 50px" :rules="rules" ref="formRef">
-        <el-form-item label="酒店账号" prop="username">
+        <el-form-item label="UID" prop="username">
           <el-input v-model="form.username" placeholder="酒店账号"></el-input>
         </el-form-item>
-        <el-form-item label="酒店名称" prop="name">
+        <el-form-item label="用户名" prop="name">
           <el-input v-model="form.name" placeholder="酒店名称"></el-input>
         </el-form-item>
-
-        <el-form-item label="价格" prop="price">
-          <el-input v-model="form.price" placeholder="价格"></el-input>
-        </el-form-item>
-
         <el-form-item label="电话" prop="phone">
           <el-input v-model="form.phone" placeholder="电话"></el-input>
         </el-form-item>
@@ -79,13 +68,6 @@
           <el-input v-model="form.email" placeholder="邮箱"></el-input>
         </el-form-item>
 
-        <el-form-item label="官网地址" prop="url">
-          <el-input v-model="form.url" placeholder="网址"></el-input>
-        </el-form-item>
-        <el-form-item label="介绍" prop="description">
-        <el-input type="textarea" v-model="form.description" placeholder="介绍"></el-input>
-
-      </el-form-item>
         <el-form-item label="头像">
           <el-upload
               class="avatar-uploader"
@@ -123,7 +105,6 @@ export default {
       pageSize: 10,  // 每页显示的个数
       total: 0,
       username: null,
-      name:null,
       fromVisible: false,
       form: {},
       user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
@@ -159,7 +140,7 @@ export default {
       this.$refs.formRef.validate((valid) => {
         if (valid) {
           this.$request({
-            url: this.form.id ? '/hotel/update' : '/hotel/add',
+            url: this.form.id ? '/user/update' : '/user/add',
             method: this.form.id ? 'PUT' : 'POST',
             data: this.form
           }).then(res => {
@@ -177,7 +158,7 @@ export default {
 
     del(id) {   // 单个删除
       this.$confirm('您确定删除吗？', '确认删除', {type: "warning"}).then(response => {
-        this.$request.delete('/hotel/delete/' + id).then(res => {
+        this.$request.delete('/user/delete/' + id).then(res => {
           if (res.code === '200') {   // 表示操作成功
             this.$message.success('操作成功')
             this.load(1)
@@ -197,7 +178,7 @@ export default {
         return
       }
       this.$confirm('您确定批量删除这些数据吗？', '确认删除', {type: "warning"}).then(response => {
-        this.$request.delete('/hotel/delete/batch', {data: this.ids}).then(res => {
+        this.$request.delete('/user/delete/batch', {data: this.ids}).then(res => {
           if (res.code === '200') {   // 表示操作成功
             this.$message.success('操作成功')
             this.load(1)
@@ -212,40 +193,17 @@ export default {
 
     load(pageNum) {  // 分页查询
       if (pageNum) this.pageNum = pageNum
-      this.$request.get('/hotel/selectPage', {
+      this.$request.get('/user/selectPage', {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
           username: this.username,
-          name:this.name,
         }
       }).then(res => {
         this.tableData = res.data?.list
         this.total = res.data?.total
       })
     },
-
-    // load(pageNum) {  // 分页查询
-    //   if (pageNum) this.pageNum = pageNum;
-    //   let params = {
-    //     pageNum: this.pageNum,
-    //     pageSize: this.pageSize
-    //   };
-    //   if (this.searchType === 'id') {
-    //     params.id = this.searchValue;
-    //   } else {
-    //     params.name = this.searchValue;
-    //   }
-    //   this.$request.get('/hotel/selectPage')
-    //       .then(res => {
-    //         this.tableData = res.data?.list;
-    //         this.total = res.data?.total;
-    //       });
-    // },
-    // reset() {
-    //   this.searchValue = '';
-    // },
-
 
     reset() {
       this.username = null

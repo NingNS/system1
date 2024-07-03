@@ -3,7 +3,9 @@ package com.example.controller;
 
 import com.example.common.Result;
 import com.example.entity.Hotel;
+import com.example.entity.User;
 import com.example.service.HotelService;
+import com.example.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,35 +14,29 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/hotel")
-public class HotelController {
+@RequestMapping("/user")
+public class UserController {
 
     @Resource
-    private HotelService hotelService;
+    private UserService userService;
 
     @GetMapping("/selectAll")
-    public Result selectAll(Hotel hotel) {
-        List<Hotel> list = hotelService.selectAll(hotel);
+    public Result selectAll(User user) {
+        List<User> list = userService.selectAll(user);
         return Result.success(list);
     }
 
     @GetMapping("/selectPage")
-    public Result selectPage(Hotel hotel,
+    public Result selectPage(User user,
                              @RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageInfo<Hotel> page = hotelService.selectPage(hotel, pageNum, pageSize);
+        PageInfo<User> page = userService.selectPage(user, pageNum, pageSize);
         return Result.success(page);
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody Hotel hotel) {
-        hotelService.add(hotel);
-        return Result.success();
-    }
-
-    @PutMapping("/update")
-    public Result updateById(@RequestBody Hotel hotel) {
-        hotelService.updateById(hotel);
+    public Result add(@RequestBody User user) {
+        userService.add(user);
         return Result.success();
     }
 
@@ -49,7 +45,7 @@ public class HotelController {
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
-        hotelService.deleteById(id);
+        userService.deleteById(id);
         return Result.success();
     }
 
@@ -58,8 +54,7 @@ public class HotelController {
      */
     @DeleteMapping("/delete/batch")
     public Result deleteBatch(@RequestBody List<Integer> ids) {
-        hotelService.deleteBatch(ids);
+        userService.deleteBatch(ids);
         return Result.success();
     }
-
 }

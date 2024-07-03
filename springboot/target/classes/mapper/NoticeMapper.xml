@@ -31,7 +31,10 @@
 
     <delete id="deleteById">
         delete from notice
-        where  id = #{id}
+        where  id = #{id};
+        ALTER TABLE `notice` DROP `id`;
+        ALTER TABLE `notice` ADD `id` int NOT NULL FIRST;
+        ALTER TABLE `notice` MODIFY COLUMN `id` int NOT NULL AUTO_INCREMENT,ADD PRIMARY KEY(id);
     </delete>
 
     <insert id="insert" parameterType="com.example.entity.Notice" useGeneratedKeys="true">
@@ -68,7 +71,7 @@
                 user = #{user},
             </if>
         </set>
-        where id = #{id} 
+        where id = #{id}
     </update>
 
 </mapper>
