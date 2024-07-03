@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="search">
-      <el-input placeholder="查询" style="width: 200px" v-model="username"></el-input>
+      <el-input placeholder="输入UID查询" style="width: 200px" v-model="username"></el-input>
       <el-button type="info" plain style="margin-left: 10px" @click="load(1)">查询</el-button>
       <el-button type="warning" plain style="margin-left: 10px" @click="reset">重置</el-button>
     </div>
@@ -56,10 +56,10 @@
     <el-dialog title="用户" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
       <el-form :model="form" label-width="100px" style="padding-right: 50px" :rules="rules" ref="formRef">
         <el-form-item label="UID" prop="username">
-          <el-input v-model="form.username" placeholder="酒店账号"></el-input>
+          <el-input v-model="form.username" placeholder="UID"></el-input>
         </el-form-item>
         <el-form-item label="用户名" prop="name">
-          <el-input v-model="form.name" placeholder="酒店名称"></el-input>
+          <el-input v-model="form.name" placeholder="用户名"></el-input>
         </el-form-item>
         <el-form-item label="电话" prop="phone">
           <el-input v-model="form.phone" placeholder="电话"></el-input>
@@ -67,7 +67,6 @@
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="form.email" placeholder="邮箱"></el-input>
         </el-form-item>
-
         <el-form-item label="头像">
           <el-upload
               class="avatar-uploader"

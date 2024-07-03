@@ -57,4 +57,10 @@ public class UserController {
         userService.deleteBatch(ids);
         return Result.success();
     }
+
+    @PutMapping("/update")
+    public Result update(@RequestBody User user) {
+        userService.update(user);
+        return Result.success();
+    }
 }

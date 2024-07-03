@@ -3,16 +3,14 @@ package com.example.service;
 import cn.hutool.core.util.ObjectUtil;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
-import com.example.common.enums.StatusEnum;
 import com.example.entity.Account;
-import com.example.entity.Hotel;
 import com.example.entity.User;
 import com.example.exception.CustomException;
-import com.example.mapper.HotelMapper;
 import com.example.mapper.UserMapper;
 import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -67,5 +65,46 @@ public class UserService {
         for (Integer id : ids) {
             userMapper.deleteById(id);
         }
+    }
+
+    public void update(User user) {
+        userMapper.updateById(user);
+    }
+
+    public Account login(Account account) {
+        Account user = userMapper.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(user)) {
+            throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
+        }
+        if (!account.getPassword().equals(user.getPassword())) {
+            throw new CustomException(ResultCodeEnum.USER_ACCOUNT_ERROR);
+        }
+        // 生成token
+        String tokenData = user.getId() + "-" + RoleEnum.USER.name();
+        String token = TokenUtils.createToken(tokenData, user.getPassword());
+        user.setToken(token);
+        return user;
+    }
+
+    public void register(Account account) {
+        User user = new User();
+        BeanUtils.copyProperties(account, user);
+        add(user);
+    }
+
+    public User selectById(Integer id) {
+        return userMapper.selectById(id);
+    }
+
+    public void updatePassword(Account account) {
+        User dbUser = userMapper.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(dbUser)) {
+            throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
+        }
+        if (!account.getPassword().equals(dbUser.getPassword())) {
+            throw new CustomException(ResultCodeEnum.PARAM_PASSWORD_ERROR);
+        }
+        dbUser.setPassword(account.getNewPassword());
+        userMapper.updateById(dbUser);
     }
 }

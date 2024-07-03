@@ -7,6 +7,7 @@ import com.example.common.enums.StatusEnum;
 import com.example.entity.Account;
 import com.example.entity.Admin;
 import com.example.entity.Hotel;
+import com.example.entity.User;
 import com.example.exception.CustomException;
 import com.example.mapper.HotelMapper;
 import com.example.utils.TokenUtils;
@@ -96,5 +97,17 @@ public class HotelService {
 
     public Hotel selectById(Integer id) {
         return hotelMapper.selectById(id);
+    }
+
+    public void updatePassword(Account account) {
+        Hotel dbHotel = hotelMapper.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(dbHotel)) {
+            throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
+        }
+        if (!account.getPassword().equals(dbHotel.getPassword())) {
+            throw new CustomException(ResultCodeEnum.PARAM_PASSWORD_ERROR);
+        }
+        dbHotel.setPassword(account.getNewPassword());
+        hotelMapper.updateById(dbHotel);
     }
 }

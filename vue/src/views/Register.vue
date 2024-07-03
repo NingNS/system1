@@ -17,7 +17,7 @@
           <el-option label="用户" value="USER"></el-option>
         </el-select>
         <el-form-item>
-          <el-button style="width: 100%; background-color: #333; border-color: #333; color: white" @click="register">注 册</el-button>
+          <el-button style="width: 100%; background-color: #333; border-color: #333; color: white;margin-top: 20px" @click="register">注 册</el-button>
         </el-form-item>
         <div style="display: flex; align-items: center">
           <div style="flex: 1"></div>
