@@ -5,7 +5,7 @@
 
 .manager-header {
     display: flex;
-    background-color: #2c334c;
+    background-color: #1C1C1C;
 }
 
 .manager-header-left {
@@ -112,7 +112,7 @@
 .el-menu {
     width: 200px;
     height: 100%;
-    background-color: #222b40;
+    background-color: #1C1C1C;
 }
 
 .el-submenu__title {
@@ -125,7 +125,7 @@
     color: #ccc;
     height: 50px;
     line-height: 50px;
-    background-color: #222b40 !important; /* 必须加上这个背景色，否则鼠标离开会出现白色 */
+    background-color: #1C1C1C !important; /* 必须加上这个背景色，否则鼠标离开会出现白色 */
 }
 
 .el-menu-item.is-active {
@@ -138,7 +138,8 @@
 }
 
 .el-menu .is-active {
-    color: #3399ff !important;
+    color: #ccc;
+    background-color: #1C1C1C !important;
 }
 
 .el-submenu__title:hover {

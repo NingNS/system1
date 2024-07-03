@@ -9,15 +9,23 @@
         <el-form-item prop="password">
           <el-input prefix-icon="el-icon-lock" placeholder="请输入密码" show-password  v-model="form.password"></el-input>
         </el-form-item>
+        <el-form-item prop="role">
+          <el-select v-model="form.role" placeholder="请选择角色" style="width: 100%">
+            <el-option label="管理员" value="ADMIN"></el-option>
+            <el-option label="酒店" value="HOTEL"></el-option>
+            <el-option label="用户" value="USER"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item>
           <el-button style="width: 100%; background-color: #333; border-color: #333; color: white" @click="login">登 录</el-button>
         </el-form-item>
-<!--        <div style="display: flex; align-items: center">-->
-<!--          <div style="flex: 1"></div>-->
-<!--          <div style="flex: 1; text-align: right">-->
-<!--            还没有账号？请 <a href="/register">注册</a>-->
-<!--          </div>-->
-<!--        </div>-->
+
+        <div style="display: flex; align-items: center">
+          <div style="flex: 1"></div>
+          <div style="flex: 1; text-align: right">
+            还没有账号？请 <a href="/register" style="color: #2a60c9">注册</a>
+          </div>
+        </div>
       </el-form>
     </div>
   </div>
@@ -28,7 +36,7 @@ export default {
   name: "Login",
   data() {
     return {
-      form: { role: 'ADMIN' },
+      form: {},
       rules: {
         username: [
           { required: true, message: '请输入账号', trigger: 'blur' },
@@ -67,7 +75,7 @@ export default {
 .container {
   height: 100vh;
   overflow: hidden;
-  background-image: url("@/assets/imgs/bg.jpg");
+  background-image: url("@/assets/imgs/VCG211336596471.jpg");
   background-size: 100%;
   display: flex;
   align-items: center;
@@ -75,6 +83,6 @@ export default {
   color: #666;
 }
 a {
-  color: #2a60c9;
+  color:	#363636;
 }
 </style>

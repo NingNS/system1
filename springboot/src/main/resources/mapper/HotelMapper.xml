@@ -39,26 +39,6 @@
 
 
 
-
-    <select id="selectAll" resultType="com.example.entity.Hotel">
-        select *
-        from hotel
-        <where>
-            <if test="id != null"> and id = #{id}</if>
-            <if test="username != null"> and username like concat('%', #{username}, '%')</if>
-            <if test="password != null"> and password = #{password}</if>
-            <if test="name != null"> and name = #{name}</if>
-            <if test="phone != null"> and phone = #{phone}</if>
-            <if test="email != null"> and email= #{email}</if>
-            <if test="avatar != null"> and avatar = #{avatar}</if>
-            <if test="role != null"> and role = #{role}</if>
-            <if test="price != null"> and price = #{price}</if>
-            <if test="url != null"> and url = #{url}</if>
-            <if test="description != null"> and description = #{description}</if>
-            <if test="status != null"> and status = #{status}</if>
-        </where>
-    </select>
-
     <update id="updateById" parameterType="com.example.entity.Hotel">
         update hotel
         <set>
@@ -102,6 +82,29 @@
 
     <delete id="deleteById">
         delete from hotel
-        where  id = #{id}
+        where  id = #{id};
+        ALTER TABLE `hotel` DROP `id`;
+        ALTER TABLE `hotel` ADD `id` int NOT NULL FIRST;
+        ALTER TABLE `hotel` MODIFY COLUMN `id` int NOT NULL AUTO_INCREMENT,ADD PRIMARY KEY(id);
+
     </delete>
+
+    <select id="selectAll" resultType="com.example.entity.Hotel">
+        select *
+        from hotel
+        <where>
+            <if test="id != null"> and id = #{id}</if>
+            <if test="username != null"> and username like concat('%', #{username}, '%')</if>
+            <if test="password != null"> and password = #{password}</if>
+            <if test="name != null"> and name like concat('%', #{name}, '%')</if>
+            <if test="phone != null"> and phone = #{phone}</if>
+            <if test="email != null"> and email= #{email}</if>
+            <if test="avatar != null"> and avatar = #{avatar}</if>
+            <if test="role != null"> and role = #{role}</if>
+            <if test="price != null"> and price = #{price}</if>
+            <if test="url != null"> and url = #{url}</if>
+            <if test="description != null"> and description = #{description}</if>
+            <if test="status != null"> and status = #{status}</if>
+        </where>
+    </select>
 </mapper>
