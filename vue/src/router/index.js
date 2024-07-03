@@ -25,6 +25,7 @@ const routes = [
       { path: 'hotel', name: 'Hotel', meta: { name: '酒店信息' }, component: () => import('../views/manager/Hotel') },
       { path: 'hotelPerson', name: 'HotelPerson', meta: { name: '个人信息' }, component: () => import('../views/manager/HotelPerson')},
       { path: 'user', name: 'User', meta: { name: '用户信息' }, component: () => import('../views/manager/User.vue') },
+      { path: 'type', name: 'Type', meta: { name: '分类信息' }, component: () => import('../views/manager/Type') },
     ]
   },
   {
