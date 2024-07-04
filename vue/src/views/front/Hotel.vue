@@ -65,6 +65,9 @@ export default {
         }
       })
     },
+    navToDetail(id) {
+      location.href = '/front/detail?id=' + id
+    }
   }
 }
 </script>

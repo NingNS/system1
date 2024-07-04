@@ -23,11 +23,12 @@
         order by id desc
     </select>
 
+
     <select id="selectById" resultType="com.example.entity.Type">
-        select
-        <include refid="Base_Column_List" />
+        select type.*, hotel.name as hotelName
         from type
-        where id = #{id}
+        left join hotel on type.hotel_id = hotel.id
+        where type.id = #{id}
     </select>
 
     <delete id="deleteById">
