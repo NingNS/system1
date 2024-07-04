@@ -81,4 +81,10 @@ public class TypeController {
         return Result.success(page);
     }
 
+    @GetMapping("/selectByHotelId")
+    public Result selectByHotelId(@RequestParam Integer id) {
+        List<Type> list = typeService.selectByHotelId(id);
+        return Result.success(list);
+    }
+
 }

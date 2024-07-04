@@ -62,4 +62,10 @@ public class HotelController {
         return Result.success();
     }
 
+    @GetMapping("/selectById")
+    public Result selectById(@RequestParam Integer id) {
+        Hotel hotel = hotelService.selectById(id);
+        return Result.success(hotel);
+    }
+
 }

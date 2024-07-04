@@ -13,7 +13,7 @@
         left join hotel on type.hotel_id = hotel.id
         <where>
             <if test="id != null"> and id = #{id}</if>
-            <if test="name != null"> and type.name like concat('%', #{name}, '%')</if>
+            <if test="hotelName != null"> and hotel.name like concat('%', #{hotelName}, '%')</if>
             <if test="description != null"> and description = #{description}</if>
             <if test="price != null"> and type.price = #{price}</if>
             <if test="num != null"> and num = #{num}</if>

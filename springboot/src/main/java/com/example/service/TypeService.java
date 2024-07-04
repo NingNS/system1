@@ -84,4 +84,8 @@ public class TypeService {
         return PageInfo.of(list);
     }
 
+    public List<Type> selectByHotelId(Integer hotelId) {
+        return typeMapper.selectByHotelId(hotelId);
+    }
+
 }

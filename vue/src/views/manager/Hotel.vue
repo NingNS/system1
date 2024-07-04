@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="search">
-      <el-input placeholder="查询酒店名称" style="width: 200px" v-model="name"></el-input>
+      <el-input placeholder="查询名称" style="width: 200px" v-model="name"></el-input>
       <el-button type="info" plain style="margin-left: 10px" @click="load(1)">查询</el-button>
       <el-button type="warning" plain style="margin-left: 10px" @click="reset">重置</el-button>
     </div>
@@ -248,7 +248,7 @@ export default {
 
 
     reset() {
-      this.username = null
+      this.name = null
       this.load(1)
       this.searchValue = ''
     },

@@ -64,44 +64,14 @@
         <el-row :gutter="20">
           <el-col :span="6" v-for="item in hotelData">
             <el-card :body-style="{ padding: '15px' }" shadow="hover" style = "border-radius: 12px">
-            <img :src="item.avatar" style="width: 100%; height: 175px; border-radius: 10px" alt="">
+            <img :src="item.avatar" style="width: 100%; height: 175px; border-radius: 10px" alt="" @click="navToDetail(item.id)">
             <div style="font-size: 16px; font-weight: bold; margin-top: 10px; color: #455873FF">{{item.name}}</div>
             <div style="margin-top: 10px">
               <span style="font-weight: bold; font-size: 16px; color: red">￥{{item.price}}</span> 起
-<!--              <span style="font-size: 14px; color: #455873FF; margin-left: 20px"><i class="el-icon-chat-line-square"></i> 1688点评</span>-->
+              <span style="font-size: 14px; color: #455873FF; margin-left: 20px" @click="navToDetail(item.id)"><i class="el-icon-more"></i>查看详情</span>
             </div>
             </el-card>
           </el-col>
-<!--          <el-col :span="6">-->
-<!--            <el-card :body-style="{ padding: '15px' }" shadow="hover" style = "border-radius: 12px">-->
-<!--              <img src="@/assets/imgs/img_9.png" style="width: 100%; height: 175px; border-radius: 10px" alt="">-->
-<!--              <div style="font-size: 16px; font-weight: bold; margin-top: 10px; color: #455873FF">如家酒店</div>-->
-<!--              <div style="margin-top: 10px">-->
-<!--                <span style="font-weight: bold; font-size: 16px; color: red">￥180</span> 起-->
-<!--                <span style="font-size: 14px; color: #455873FF; margin-left: 20px"><i class="el-icon-chat-line-square"></i> 1688点评</span>-->
-<!--              </div>-->
-<!--            </el-card>-->
-<!--          </el-col>-->
-<!--          <el-col :span="6">-->
-<!--            <el-card :body-style="{ padding: '15px' }" shadow="hover" style = "border-radius: 12px">-->
-<!--              <img src="@/assets/imgs/img_10.png" style="width: 100%; height: 175px; border-radius: 10px" alt="">-->
-<!--              <div style="font-size: 16px; font-weight: bold; margin-top: 10px; color: #455873FF">全季酒店</div>-->
-<!--              <div style="margin-top: 10px">-->
-<!--                <span style="font-weight: bold; font-size: 16px; color: red">￥180</span> 起-->
-<!--                <span style="font-size: 14px; color: #455873FF; margin-left: 20px"><i class="el-icon-chat-line-square"></i> 1688点评</span>-->
-<!--              </div>-->
-<!--            </el-card>-->
-<!--          </el-col>-->
-<!--          <el-col :span="6">-->
-<!--            <el-card :body-style="{ padding: '15px' }" shadow="hover" style = "border-radius: 12px">-->
-<!--              <img src="@/assets/imgs/img_11.png" style="width: 100%; height: 175px; border-radius: 10px" alt="">-->
-<!--              <div style="font-size: 16px; font-weight: bold; margin-top: 10px; color: #455873FF">维也纳酒店</div>-->
-<!--              <div style="margin-top: 10px">-->
-<!--                <span style="font-weight: bold; font-size: 16px; color: red">￥180</span> 起-->
-<!--                <span style="font-size: 14px; color: #455873FF; margin-left: 20px"><i class="el-icon-chat-line-square"></i> 1688点评</span>-->
-<!--              </div>-->
-<!--            </el-card>-->
-<!--          </el-col>-->
         </el-row>
       </div>
     </div>
@@ -132,6 +102,9 @@ export default {
         }
 
       })
+    },
+    navToDetail(id) {
+      location.href = '/front/hotel?id=' + id
     }
   }
 }
