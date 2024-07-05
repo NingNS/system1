@@ -17,12 +17,14 @@
     <div style="width: 60%; margin: 0 auto">
       <el-row :gutter="20">
         <el-col :span="6" v-for="item in typeData">
+          <el-card :body-style="{ padding: '5px' }" shadow="hover" style = "border-radius: 12px">
           <img :src="item.img" style="width: 100%; height: 200px; border-radius: 10px" alt="" @click="navToDetail(item.id)">
-          <div style="font-size: 16px; margin-top: 10px; color: #455873FF">
+          <div style="font-size: 16px; margin-top: 10px ;margin-bottom: 10px;margin-left: 5px; color: #455873FF">
             <span style="font-weight: bold;">{{item.name}}</span>
             <span style="font-weight: bold; font-size: 16px; color: red; margin-left: 10px">￥{{item.price}}</span>
             <span style="font-size: 14px; color: #455873FF; margin-left: 20px"><i class="el-icon-s-home"></i> 剩余 {{item.num}} 间</span>
           </div>
+          </el-card>
         </el-col>
       </el-row>
     </div>
