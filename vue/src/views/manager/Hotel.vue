@@ -120,7 +120,7 @@ export default {
 
       tableData: [],  // 所有的数据
       pageNum: 1,   // 当前的页码
-      pageSize: 10,  // 每页显示的个数
+      pageSize: 6,  // 每页显示的个数
       total: 0,
       username: null,
       name:null,

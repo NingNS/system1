@@ -27,6 +27,7 @@ const routes = [
       { path: 'user', name: 'User', meta: { name: '用户信息' }, component: () => import('../views/manager/User.vue') },
       { path: 'type', name: 'Type', meta: { name: '分类信息' }, component: () => import('../views/manager/Type') },
       { path: 'room', name: 'Room', meta: { name: '客房信息' }, component: () => import('../views/manager/Room.vue') },
+      { path: 'orders', name: 'Orders', meta: { name: '订单信息' }, component: () => import('../views/manager/Orders') },
     ]
   },
   {
@@ -39,6 +40,7 @@ const routes = [
       { path: 'hotel', name: 'Hotel', meta: { name: '酒店信息' }, component: () => import('../views/front/Hotel') },
       { path: 'detail', name: 'Detail', meta: { name: '客房信息' }, component: () => import('../views/front/Detail') },
       { path: 'collect', name: 'Detail', meta: { name: '我的收藏' }, component: () => import('../views/front/Collect') },
+      { path: 'orders', name: 'Orders', meta: { name: '订单信息' }, component: () => import('../views/front/Orders') },
     ]
   },
   { path: '/login', name: 'Login', meta: { name: '登录' }, component: () => import('../views/Login.vue') },

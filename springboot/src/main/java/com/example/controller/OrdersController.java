@@ -1,8 +1,8 @@
 package com.example.controller;
 
 import com.example.common.Result;
-import com.example.entity.Room;
-import com.example.service.RoomService;
+import com.example.entity.Orders;
+import com.example.service.OrdersService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,18 +10,18 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/room")
-public class RoomController {
+@RequestMapping("/orders")
+public class OrdersController {
 
     @Resource
-    private RoomService roomService;
+    private OrdersService ordersService;
 
     /**
      * 新增
      */
     @PostMapping("/add")
-    public Result add(@RequestBody Room room) {
-        roomService.add(room);
+    public Result add(@RequestBody Orders orders) {
+        ordersService.add(orders);
         return Result.success();
     }
 
@@ -30,7 +30,7 @@ public class RoomController {
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
-        roomService.deleteById(id);
+        ordersService.deleteById(id);
         return Result.success();
     }
 
@@ -39,7 +39,7 @@ public class RoomController {
      */
     @DeleteMapping("/delete/batch")
     public Result deleteBatch(@RequestBody List<Integer> ids) {
-        roomService.deleteBatch(ids);
+        ordersService.deleteBatch(ids);
         return Result.success();
     }
 
@@ -47,8 +47,8 @@ public class RoomController {
      * 修改
      */
     @PutMapping("/update")
-    public Result updateById(@RequestBody Room room) {
-        roomService.updateById(room);
+    public Result updateById(@RequestBody Orders orders) {
+        ordersService.updateById(orders);
         return Result.success();
     }
 
@@ -57,16 +57,22 @@ public class RoomController {
      */
     @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id) {
-        Room room = roomService.selectById(id);
-        return Result.success(room);
+        Orders orders = ordersService.selectById(id);
+        return Result.success(orders);
+    }
+
+    @GetMapping("/selectByUserId")
+    public Result selectByUserId(@RequestParam Integer id) {
+        List<Orders> orders = ordersService.selectByUserId(id);
+        return Result.success(orders);
     }
 
     /**
      * 查询所有
      */
     @GetMapping("/selectAll")
-    public Result selectAll(Room room ) {
-        List<Room> list = roomService.selectAll(room);
+    public Result selectAll(Orders orders ) {
+        List<Orders> list = ordersService.selectAll(orders);
         return Result.success(list);
     }
 
@@ -74,11 +80,13 @@ public class RoomController {
      * 分页查询
      */
     @GetMapping("/selectPage")
-    public Result selectPage(Room room,
+    public Result selectPage(Orders orders,
                              @RequestParam(defaultValue = "1") Integer pageNum,
-                             @RequestParam(defaultValue = "9") Integer pageSize) {
-        PageInfo<Room> page = roomService.selectPage(room, pageNum, pageSize);
+                             @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageInfo<Orders> page = ordersService.selectPage(orders, pageNum, pageSize);
         return Result.success(page);
     }
+
+
 
 }

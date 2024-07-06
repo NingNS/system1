@@ -23,32 +23,33 @@
           <div style="font-size: 16px; font-weight: bold; margin: 10px 15px">洗浴用品</div>
           <div style="font-size: 14px; margin: 15px 15px;">
             <div style="display: flex; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-            <span style="flex: 1">
-              <i class="el-icon-circle-check"></i> 牙刷
-            </span>
-              <span style="flex: 1">
-              <i class="el-icon-circle-check"></i> 牙膏
-            </span>
-              <span style="flex: 1">
-              <i class="el-icon-circle-check"></i> 牙膏
-            </span>
-              <span style="flex: 1">
-              <i class="el-icon-circle-check"></i> 洗发水
-            </span>
-            </div>
-            <div style="display: flex; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-            <span style="flex: 1">
-              <i class="el-icon-circle-check"></i> 牙刷
-            </span>
-              <span style="flex: 1">
-              <i class="el-icon-circle-check"></i> 牙膏
-            </span>
-              <span style="flex: 1">
-              <i class="el-icon-circle-check"></i> 牙膏
-            </span>
-              <span style="flex: 1">
-              <i class="el-icon-circle-check"></i> 洗发水
-            </span>
+<!--            <span style="flex: 1">-->
+<!--              <i class="el-icon-circle-check"></i> 牙刷-->
+<!--            </span>-->
+<!--              <span style="flex: 1">-->
+<!--              <i class="el-icon-circle-check"></i> 牙膏-->
+<!--            </span>-->
+<!--              <span style="flex: 1">-->
+<!--              <i class="el-icon-circle-check"></i> 牙膏-->
+<!--            </span>-->
+<!--              <span style="flex: 1">-->
+<!--              <i class="el-icon-circle-check"></i> 洗发水-->
+<!--            </span>-->
+<!--            </div>-->
+<!--            <div style="display: flex; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">-->
+<!--            <span style="flex: 1">-->
+<!--              <i class="el-icon-circle-check"></i> 牙刷-->
+<!--            </span>-->
+<!--              <span style="flex: 1">-->
+<!--              <i class="el-icon-circle-check"></i> 牙膏-->
+<!--            </span>-->
+<!--              <span style="flex: 1">-->
+<!--              <i class="el-icon-circle-check"></i> 牙膏-->
+<!--            </span>-->
+<!--              <span style="flex: 1">-->
+<!--              <i class="el-icon-circle-check"></i> 洗发水-->
+<!--            </span>-->
+              <h1>此处为详细信息</h1>
             </div>
           </div>
 
@@ -139,12 +140,36 @@
 
           <div style="margin-left: 15px; margin-top: 25px">
             <el-button type="primary" @click="addCollect">加入收藏</el-button>
-            <el-button type="success">立即预订</el-button>
+            <el-button type="success" @click="initDialog">立即预订</el-button>
           </div>
         </div>
       </div>
       <!--      <div style="font-weight: 700; font-size: 16px; padding: 15px 30px; border-bottom: 1px solid #eeeeee">评论信息</div>-->
       <div></div>
+      <div>
+        <el-dialog title="时间" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
+        <el-form label-width="100px" style="padding-right: 50px">
+          <el-form-item prop="title" label="入住时间">
+            <el-date-picker
+                v-model="inTime"
+                type="date"
+                placeholder="选择日期" value-format="yyyy-MM-dd">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item prop="typeId" label="离开时间">
+            <el-date-picker
+                v-model="outTime"
+                type="date"
+                placeholder="选择日期" value-format="yyyy-MM-dd">
+            </el-date-picker>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="fromVisible = false">取 消</el-button>
+          <el-button type="primary" @click="save">确 定</el-button>
+        </div>
+      </el-dialog>
+      </div>
     </div>
   </div>
 </template>
@@ -159,6 +184,10 @@ export default {
       user:JSON.parse(localStorage.getItem('xm-user') || '{}'),
       typeData: {},
       typeId: typeId,
+      fromVisible: false,
+      form:{},
+      inTime:null,
+      outTime:null,
     }
   },
   mounted() {
@@ -184,7 +213,28 @@ export default {
           this.$message.error(res.msg)
         }
       })
-    }
+    },
+    initDialog(){
+      this.fromVisible = true
+    },
+    save(){
+      let data={
+        userId: this.user.id,
+        typeId: this.typeId,
+        hotelId: this.typeData.hotelId,
+        inTime:this.inTime,
+        outTime:this.outTime,
+      }
+      this.$request.post('/orders/add', data).then(res => {
+        if (res.code === '200') {  // 表示成功保存
+          this.$message.success('预订成功')
+          this.fromVisible = false
+        } else {
+          this.$message.error(res.msg)  // 弹出错误的信息
+        }
+      })
+    },
+
   }
 }
 </script>

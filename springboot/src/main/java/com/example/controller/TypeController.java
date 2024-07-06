@@ -76,7 +76,7 @@ public class TypeController {
     @GetMapping("/selectPage")
     public Result selectPage(Type type,
                              @RequestParam(defaultValue = "1") Integer pageNum,
-                             @RequestParam(defaultValue = "10") Integer pageSize) {
+                             @RequestParam(defaultValue = "9") Integer pageSize) {
         PageInfo<Type> page = typeService.selectPage(type, pageNum, pageSize);
         return Result.success(page);
     }

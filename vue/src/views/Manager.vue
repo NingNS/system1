@@ -51,6 +51,7 @@
             </template>
             <el-menu-item index="/type">房间分类</el-menu-item>
             <el-menu-item index="/room">房间信息</el-menu-item>
+            <el-menu-item index="/orders">订单信息</el-menu-item>
           </el-submenu>
 
           <el-submenu index="user" v-if="user.role==='ADMIN'">
