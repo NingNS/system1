@@ -151,4 +151,11 @@ public class OrdersService {
         orders.setUserId(id);
         return ordersMapper.selectAll(orders);
     }
+
+    public List<Orders> selectCheckinId(Integer id) {
+        Orders orders = new Orders();
+        orders.setHotelId(id);
+        orders.setStatus(OrdersEnum.STATUS_CHECKING.status);
+        return ordersMapper.selectAll(orders);
+    }
 }

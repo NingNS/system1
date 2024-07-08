@@ -4,11 +4,9 @@ import cn.hutool.core.util.ObjectUtil;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.common.enums.RoomEnum;
-import com.example.entity.Account;
-import com.example.entity.Hotel;
-import com.example.entity.Room;
-import com.example.entity.Type;
+import com.example.entity.*;
 import com.example.exception.CustomException;
+import com.example.mapper.OrdersMapper;
 import com.example.mapper.RoomMapper;
 import com.example.mapper.TypeMapper;
 import com.example.utils.TokenUtils;
@@ -26,6 +24,8 @@ public class RoomService {
     private RoomMapper roomMapper;
     @Resource
     private TypeMapper typeMapper;
+    @Resource
+    private OrdersMapper ordersMapper;
 
     /**
      * 新增
@@ -144,4 +144,8 @@ public class RoomService {
         return PageInfo.of(list);
     }
 
+    public List<Room> selectByTypeId(String orderId) {
+        Orders orders= ordersMapper.selectByOrderId(orderId);
+        return roomMapper.selectByTypeId(orders.getTypeId());
+    }
 }

@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -58,6 +59,12 @@ public class RoomController {
     @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id) {
         Room room = roomService.selectById(id);
+        return Result.success(room);
+    }
+
+    @GetMapping("/selectByTypeId")
+    public Result selectByTypeId(@RequestParam String orderId) {
+        List<Room> room=roomService.selectByTypeId(orderId);
         return Result.success(room);
     }
 

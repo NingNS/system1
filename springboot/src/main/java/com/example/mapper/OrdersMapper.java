@@ -2,6 +2,7 @@ package com.example.mapper;
 
 import com.example.entity.Orders;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Select;
 
 
 import java.util.List;
@@ -34,4 +35,6 @@ public interface OrdersMapper {
      */
     List<Orders> selectAll(Orders orders);
 
+    @Select("select * from orders where order_id=#{orderId}")
+    Orders selectByOrderId(String orderId);
 }

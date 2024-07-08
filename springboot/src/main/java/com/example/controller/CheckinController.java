@@ -1,8 +1,9 @@
 package com.example.controller;
 
 import com.example.common.Result;
+import com.example.entity.Checkin;
 import com.example.entity.Orders;
-import com.example.service.OrdersService;
+import com.example.service.CheckinService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,18 +11,18 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/orders")
-public class OrdersController {
+@RequestMapping("/checkin")
+public class CheckinController {
 
     @Resource
-    private OrdersService ordersService;
+    private CheckinService checkinService;
 
     /**
      * 新增
      */
     @PostMapping("/add")
-    public Result add(@RequestBody Orders orders) {
-        ordersService.add(orders);
+    public Result add(@RequestBody Checkin checkin) {
+        checkinService.add(checkin);
         return Result.success();
     }
 
@@ -30,7 +31,7 @@ public class OrdersController {
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
-        ordersService.deleteById(id);
+        checkinService.deleteById(id);
         return Result.success();
     }
 
@@ -39,7 +40,7 @@ public class OrdersController {
      */
     @DeleteMapping("/delete/batch")
     public Result deleteBatch(@RequestBody List<Integer> ids) {
-        ordersService.deleteBatch(ids);
+        checkinService.deleteBatch(ids);
         return Result.success();
     }
 
@@ -47,8 +48,8 @@ public class OrdersController {
      * 修改
      */
     @PutMapping("/update")
-    public Result updateById(@RequestBody Orders orders) {
-        ordersService.updateById(orders);
+    public Result updateById(@RequestBody Checkin checkin) {
+        checkinService.updateById(checkin);
         return Result.success();
     }
 
@@ -57,22 +58,28 @@ public class OrdersController {
      */
     @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id) {
-        Orders orders = ordersService.selectById(id);
-        return Result.success(orders);
+        Checkin checkin = checkinService.selectById(id);
+        return Result.success(checkin);
+    }
+
+    @GetMapping("/tuifang/{id}")
+    public Result tuifang(@PathVariable Integer id) {
+        checkinService.tuifang(id);
+        return Result.success();
     }
 
     @GetMapping("/selectByUserId")
     public Result selectByUserId(@RequestParam Integer id) {
-        List<Orders> orders = ordersService.selectByUserId(id);
-        return Result.success(orders);
+        List<Checkin> checkin = checkinService.selectByUserId(id);
+        return Result.success(checkin);
     }
 
     /**
      * 查询所有
      */
     @GetMapping("/selectAll")
-    public Result selectAll(Orders orders ) {
-        List<Orders> list = ordersService.selectAll(orders);
+    public Result selectAll(Checkin checkin ) {
+        List<Checkin> list = checkinService.selectAll(checkin);
         return Result.success(list);
     }
 
@@ -80,17 +87,17 @@ public class OrdersController {
      * 分页查询
      */
     @GetMapping("/selectPage")
-    public Result selectPage(Orders orders,
+    public Result selectPage(Checkin checkin,
                              @RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageInfo<Orders> page = ordersService.selectPage(orders, pageNum, pageSize);
+        PageInfo<Checkin> page = checkinService.selectPage(checkin, pageNum, pageSize);
         return Result.success(page);
     }
 
     @GetMapping("/selectChecking")
     public Result selectChecking(@RequestParam Integer id) {
-        List<Orders> orders = ordersService.selectCheckinId(id);
-        return Result.success(orders);
+        List<Orders> checkin = checkinService.selectByCheckingID(id);
+        return Result.success(checkin);
     }
 
 }

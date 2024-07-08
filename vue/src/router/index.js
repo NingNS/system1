@@ -28,6 +28,7 @@ const routes = [
       { path: 'type', name: 'Type', meta: { name: '分类信息' }, component: () => import('../views/manager/Type') },
       { path: 'room', name: 'Room', meta: { name: '客房信息' }, component: () => import('../views/manager/Room.vue') },
       { path: 'orders', name: 'Orders', meta: { name: '订单信息' }, component: () => import('../views/manager/Orders') },
+      { path: 'checkin', name: 'Checkin', meta: { name: '入住登记' }, component: () => import('../views/manager/Checkin') },
     ]
   },
   {

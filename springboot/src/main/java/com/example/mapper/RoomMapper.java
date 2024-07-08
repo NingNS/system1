@@ -35,7 +35,8 @@ public interface RoomMapper {
      */
     List<Room> selectAll(Room room);
 
-    List<Room> selectByType(Room room);
+    @Select("select * from room where type_id=#{id} and status='空闲'")
+    List<Room> selectByTypeId(Integer id);
 
     @Select("select * from room where name=#{name}")
     Room selectByName(String name);
